@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>First-Year Halloween Pickleball — 64-Team Bracket</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap title">
+      <div class="pumpkin" aria-hidden="true">🎃</div>
+      <div>
+        <h1 id="pageTitle">First-Year Halloween Pickleball — 64-Team Bracket</h1>
+        <p class="subtitle">Four regions of 16 teams each → Final Four → Champion</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- SETUP PANEL -->
+    <section class="panel" id="setup">
+      <div class="controls">
+        <label>
+          Bracket Name
+          <input id="bracketName" type="text" placeholder="e.g., FYE Halloween 2025 — Friday Night"/>
+        </label>
+        <div class="btn-row">
+          <button class="btn" id="makeInputs">Create 64 Team Inputs</button>
+          <button class="btn ghost" id="fillSamples">🎲 Fill Sample Team Names</button>
+          <button class="btn primary" id="generate">Generate Bracket</button>
+          <button class="btn" id="reset">Reset</button>
+        </div>
+      </div>
+
+      <div id="inputs" class="regions-inputs">
+        <!-- Four regions, 16 inputs each, will be injected here -->
+      </div>
+    </section>
+
+    <!-- BRACKET LAYOUT: [NW] [SW] | Finals | [NE] [SE] -->
+    <section class="bracket-shell">
+      <div class="grid-footer">
+        <div class="legend">
+          <span class="pill">Click a team to advance →</span>
+          <span class="pill">Winners auto-propagate</span>
+          <span class="pill">64 teams • 4×(Round of 16 → Regional Champ)</span>
+        </div>
+
+        <div class="share-tools">
+          <input id="shareUrl" type="text" readonly placeholder="Shareable URL appears after Generate" />
+          <button class="btn ghost" id="zoomHalf">Shrink ×0.5</button>
+          <button class="btn" id="zoomFit">Zoom to Fit</button>
+          <button class="btn" id="zoomReset">100%</button>
+          <button class="btn" id="copyUrl">Copy URL</button>
+          <button class="btn success" id="printBtn">Print / Save PDF</button>
+        </div>
+      </div>
+
+      <div class="bracket-toolbar">
+    <button id="fullscreenBtn" class="btn primary">🕹️ Full Screen Bracket</button>
+  </div>
+
+      <!-- Scale wrapper -->
+      <div id="fitWrap" class="fit-wrap">
+        <!-- Grid with 5 columns: NW | SW | Finals | NE | SE -->
+        <div id="bracket" class="bracket-grid">
+          <div id="region-NW" class="region"></div>
+          <div id="region-SW" class="region"></div>
+
+          <div id="finals" class="finals">
+  <div id="semi-1" class="match" data-label="Final Four"></div>
+  <div id="champ"  class="match" data-label="Championship"></div>
+  <div id="semi-2" class="match" data-label="Final Four"></div>
+</div>
+
+          <div id="region-NE" class="region"></div>
+          <div id="region-SE" class="region"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <details>
+        <summary><strong>How to use</strong></summary>
+        <ol>
+          <li>Click <em>Create 64 Team Inputs</em>. Enter 16 team names for each region (or use 🎲 to fill samples).</li>
+          <li>Click <em>Generate Bracket</em>. Click a team in any match to advance it.</li>
+          <li>Regional champions feed the Final Four (semi-1: NW vs SW, semi-2: NE vs SE), then Championship.</li>
+          <li>Use <em>Print / Save PDF</em> or share the URL to show the bracket state on any device.</li>
+        </ol>
+      </details>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

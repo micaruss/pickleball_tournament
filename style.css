@@ -1,0 +1,423 @@
+/* ============================
+   First-Year Halloween Pickleball – style.css
+   ============================ */
+
+/* ---------- Core Theme ---------- */
+:root{
+  --bg:#0b0b10;
+  --card:#12121a;
+  --accent:#ff7a00;
+  --text:#f3f5f7;
+  --muted:#a7b0bb;
+
+  /* Layout tuning */
+  --page-pad: 96px;          /* tighter page padding (was much larger) */
+  --round-col-w: 170px;      /* width of each region round column */
+  --finals-col-w: 440px;     /* width of each finals “card” */
+  --col-gap: 22px;           /* gap between round columns */
+  --grid-gap: 24px;          /* gap between big grid areas */
+  --outer-gutter: 8px;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; margin:0; }
+body{
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+  color:var(--text);
+  background:radial-gradient(1200px 600px at 10% 0%, #12121a 0%, #0b0b10 60%);
+}
+
+/* ---------- Header (compact) ---------- */
+.site-header{
+  position:sticky; top:0; z-index:5;
+  backdrop-filter:saturate(140%) blur(6px);
+  background:linear-gradient(to right, rgba(10,10,14,.9), rgba(10,10,14,.6));
+  border-bottom:1px solid rgba(255,255,255,.06);
+  padding:.35rem 0;
+}
+.wrap{
+  max-width:100%;
+  margin:0 auto;
+  padding:.6rem var(--page-pad);
+}
+.title{ display:flex; align-items:center; gap:.7rem; flex-wrap:wrap; }
+.pumpkin{ font-size:1.35rem; }
+#pageTitle{ font-size:1.3rem; margin:0; }
+.subtitle{ color:var(--muted); font-size:.88rem; margin:.15rem 0 0; }
+
+/* ---------- Panels & Controls ---------- */
+.panel{
+  margin:.8rem 0; padding:.8rem var(--page-pad);
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  box-shadow:0 6px 20px rgba(0,0,0,.25);
+}
+.controls{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:.9rem;
+}
+.btn-row{ display:flex; flex-wrap:wrap; gap:.45rem; }
+label{ display:flex; flex-direction:column; gap:.3rem; font-size:.9rem; color:var(--muted); }
+input,button{
+  border-radius:10px; border:1px solid rgba(255,255,255,.08);
+  padding:.65rem .85rem; background:#171721; color:var(--text);
+}
+button{ cursor:pointer; font-weight:600; font-size:.9rem; }
+.btn.primary{ background:linear-gradient(135deg, var(--accent), #f59e0b); color:#0b0b10; border:none; }
+.btn.ghost{ background:transparent; border:1px dashed rgba(255,255,255,.25); }
+.btn.success{ background:linear-gradient(135deg,#34d399,#16a34a); color:#04130a; border:none; }
+
+/* ---------- Inputs Grid ---------- */
+.regions-inputs{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:.9rem; margin-top:.9rem;
+}
+.region-card{
+  background:#151521; border:1px solid rgba(255,255,255,.08);
+  border-radius:12px; padding:.9rem;
+}
+.region-card h3{ margin:0 0 .7rem; color:var(--muted); font-size:.95rem; }
+.team-input{ display:flex; gap:.5rem; align-items:center; margin:.32rem 0; }
+.team-input .seed{
+  width:58px; text-align:center; font-size:.8rem; color:var(--muted);
+  background:#111118; border:1px solid rgba(255,255,255,.06);
+  border-radius:999px; padding:.33rem .5rem;
+}
+.team-input input{ flex:1; }
+
+/* ---------- Bracket Shell ---------- */
+.bracket-shell{
+  margin:.9rem 0;
+  padding:.5rem var(--page-pad);       /* tighter side padding -> pushes bracket out */
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  overflow:auto;
+}
+.grid-footer{ display:none !important; } /* hide toolbar */
+
+/* Center the whole bracket horizontally */
+.fit-wrap{
+  position:relative;
+  width:100%;
+  display:flex;
+  justify-content:center;
+}
+
+/* Keep the bracket grid inline and centered within the fit-wrap */
+#bracket{
+  display:inline-block;
+  transform-origin: top center;
+  margin:0 auto;
+}
+
+/* ---------- Bracket Layout: NW/SW | Finals | NE/SE ---------- */
+.bracket-grid{
+  display:grid !important;
+  grid-template-columns: 1fr minmax(var(--finals-col-w),auto) 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "nw finals ne"
+    "sw finals se";
+  column-gap: var(--grid-gap);
+  row-gap: var(--grid-gap);
+  align-items:start;
+}
+#region-NW{ grid-area:nw; }
+#region-SW{ grid-area:sw; }
+#finals{ grid-area:finals; align-self:center; }
+#region-NE{ grid-area:ne; }
+#region-SE{ grid-area:se; }
+
+/* ---------- Region Columns ---------- */
+.region{
+  display:flex;
+  flex-direction:row;
+  align-items:flex-start;
+  gap:var(--col-gap);
+}
+.region .round{
+  display:flex;
+  flex-direction:column;
+  gap:.45rem;
+
+  /* lock width so centering math never causes column reflow */
+  flex:0 0 var(--round-col-w);
+  width:var(--round-col-w);
+  min-width:var(--round-col-w);
+  max-width:var(--round-col-w);
+}
+.round-title{
+  font-size:.8rem; color:#9aa3ad;
+  margin:.15rem 0 .25rem; text-align:left;
+}
+
+/* ---------- Match & Slot ---------- */
+.match{
+  background:transparent; border:0; padding:.2rem 0;
+  position:relative;
+}
+.slot{
+  position:relative;
+  background:transparent;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:4px;
+  padding:6px 8px;
+  height:26px;
+  display:grid;
+  grid-template-columns: 1fr auto;
+  align-items:center;
+  transition:background .08s ease, border-color .08s ease;
+}
+.slot:hover{ background:rgba(255,255,255,.05); cursor:pointer; }
+.slot.winner{ border-color:rgba(22,163,74,.8); }
+.slot .name{ font-size:.9rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.slot .seed{ font-size:.75rem; color:#9aa3ad; margin-left:.4rem; }
+
+/* Elbow connectors in regions */
+.slot::after{
+  content:""; position:absolute; right:-16px; top:50%;
+  width:16px; height:1px; background:rgba(255,255,255,.22);
+  transform:translateY(-50%);
+}
+/* --- Adjust connector position to align with meta bar --- */
+.match::after {
+  content: "";
+  position: absolute;
+  right: -16px;
+  top: calc(50% - 16px);   /* was -18px — lower the line center */
+  width: 1px;
+  height: 53px;            /* was 36px — longer to reach both slots */
+  background: rgba(255, 255, 255, .22);
+}
+
+/* ---------- Finals as compact side-by-side cards ---------- */
+.finals{
+  display:grid;
+  grid-auto-flow:column;                                   /* [Semi1][Champ][Semi2] */
+  grid-auto-columns:minmax(190px,var(--finals-col-w));
+  gap:10px;
+  align-items:center;
+  justify-content:center;
+}
+.finals .round-title{ display:none; }
+
+.finals .match{
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:8px;
+  padding:6px 8px;
+  background:#0f0f16;
+  position:relative;
+}
+/* remove elbows inside finals cards */
+#semi-1 .slot::after, #semi-2 .slot::after, #champ .slot::after{ display:none; }
+#semi-1.match::after, #semi-2.match::after, #champ.match::after{ display:none; }
+
+.finals .slot{
+  border:0;                 /* card has the border */
+  padding:4px 6px;
+  height:22px;
+}
+.finals .slot + .slot{
+  border-top:1px solid rgba(255,255,255,.16);  /* thin divider */
+}
+
+/* slightly tighter “skinny” championship */
+#champ{ padding:4px 6px; }
+#champ .slot{ height:20px; padding:3px 6px; font-weight:700; }
+
+/* ---------- Left vs Right Mirror ---------- */
+#region-NW .slot, #region-SW .slot{ grid-template-columns:auto 1fr; }
+#region-NW .slot .seed, #region-SW .slot .seed{ order:-1; margin:0 .4rem 0 0; }
+
+#region-NE, #region-SE{ flex-direction:row-reverse; }
+#region-NE .slot::after, #region-SE .slot::after{ left:-16px; right:auto; }
+#region-NE .match::after, #region-SE .match::after{ left:-16px; right:auto; }
+#region-NE .round-title, #region-SE .round-title{ text-align:right; }
+
+/* ---------- Responsive tweaks ---------- */
+@media (max-width:1200px){
+  .region .round{ min-width:150px; }
+  .slot{ height:24px; padding:5px 7px; font-size:.85rem; }
+  #pageTitle{ font-size:1.08rem; }
+}
+@media (max-width:900px){
+  #pageTitle{ font-size:1rem; }
+  .pumpkin{ font-size:1.1rem; }
+}
+
+/* ---------- Hide Bracket Before Generation ---------- */
+body.pre .bracket-shell{ display:none; }
+
+/* ---------- Compact Setup Panel ---------- */
+#setup.panel{ margin:.6rem 0; padding:.6rem var(--page-pad); border-radius:12px; }
+#setup .controls{ display:grid; grid-template-columns:1fr auto; align-items:end; gap:.6rem 1rem; }
+#setup label{ gap:.25rem; font-size:.85rem; }
+#bracketName{ height:34px; font-size:.9rem; padding:.45rem .7rem; }
+#setup .btn-row{ gap:.4rem; }
+#setup .btn{ padding:.45rem .7rem; font-size:.85rem; border-radius:8px; }
+#setup .regions-inputs{ margin-top:.75rem; gap:.6rem; }
+#setup .region-card{ padding:.6rem; border-radius:10px; }
+#setup .team-input{ margin:.25rem 0; }
+#setup .team-input .seed{ width:54px; padding:.25rem .5rem; font-size:.75rem; }
+
+/* ---------- Print ---------- */
+@media print{
+  header, .controls, .share-tools{ display:none !important; }
+  body{ background:#fff; color:#000; }
+  .panel, .bracket-shell{ box-shadow:none; border:1px solid #ddd; }
+  .slot{ background:#fff; border-color:#aaa; }
+  .round-title{ color:#555; }
+}
+
+/* ---------- Fullscreen Mode ---------- */
+body.fullscreen .site-header,
+body.fullscreen #setup.panel,
+body.fullscreen main > .panel:last-of-type{ display:none !important; }
+
+/* ---------- Fullscreen Mode (tighter layout) ---------- */
+body.fullscreen .bracket-shell {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--card);
+  z-index: 9999;
+  border-radius: 0;
+  border: none;
+  padding: 0.35rem 0.75rem;   /* was 1rem — tighter top/bottom padding */
+  overflow: auto;
+}
+
+body.fullscreen .fit-wrap {
+  display: flex;
+  justify-content: center;
+  padding-block: 8px;         /* was 18px — less vertical margin */
+}
+
+body.fullscreen #bracket {
+  transform-origin: top center;
+}
+
+.bracket-toolbar{ display:flex; justify-content:flex-end; margin-bottom:.5rem; }
+body.fullscreen #fullscreenBtn{
+  position:fixed; top:1rem; right:1rem; z-index:10000;
+  background:#f59e0b; color:#0b0b10; font-weight:800;
+  border:none; border-radius:10px; padding:.6rem 1rem;
+}
+
+/* Keep the bracket from touching the top/bottom of the shell */
+.bracket-shell { padding: .5rem .75rem; }
+.fit-wrap { padding-block: 18px; }
+.bracket-grid { margin-top: 6px; }
+
+/* ===== Winner pulse on the clicked row ===== */
+.slot.win-anim {
+  animation: slotPulse 1.2s ease-out;
+  box-shadow: 0 0 0 3px rgba(255, 120, 0, .55), 0 10px 25px rgba(0,0,0,.45);
+}
+@keyframes slotPulse {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* ===== Default floating toast (local to the clicked match) ===== */
+.win-toast {
+  position: absolute;
+  z-index: 9999;
+  pointer-events: none;
+  padding: .6rem .9rem;
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: .2px;
+  color: #fff;
+  background: linear-gradient(135deg, #f97316, #dc2626);
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 12px;
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,.35));
+  opacity: 0;
+  transform: translate(-50%, 18px) scale(.94);
+  animation: toastFloat 2.4s ease-out forwards;
+  white-space: nowrap;
+}
+@keyframes toastFloat {
+  0%   { opacity: 0; transform: translate(-50%, 24px) scale(0.92); }
+  20%  { opacity: 1; transform: translate(-50%, 0)    scale(1.05); }
+  80%  { opacity: 1; transform: translate(-50%, -8px) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -24px) scale(.98); }
+}
+
+/* ===== Center-screen Champion Animation ===== */
+.win-toast.champion {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  font-size: 2rem;
+  font-weight: 900;
+  padding: 1.2rem 2rem;
+  background: linear-gradient(135deg, #f97316, #dc2626);
+  color: #fff;
+  border: 3px solid rgba(255,255,255,.2);
+  border-radius: 16px;
+  box-shadow: 0 0 35px rgba(0,0,0,.6), 0 0 20px #f97316;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0;
+  z-index: 10000;
+  pointer-events: none;
+  animation: championFloat 3.5s ease-out forwards;
+}
+@keyframes championFloat {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.6) rotate(-3deg); }
+  10%  { opacity: 1; transform: translate(-50%, -50%) scale(1.05) rotate(2deg); }
+  20%  { transform: translate(-50%, -50%) scale(1.1) rotate(-1deg); }
+  70%  { transform: translate(-50%, -52%) scale(1.05); opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -60%) scale(0.9); }
+}
+
+@media print { .win-toast { display: none !important; } }
+
+/* ----- Match metadata (Court / Time) — matches app.js (.meta-bar / .meta-edit) ----- */
+.meta-bar{
+  display:flex;
+  align-items:center;
+  gap:.35rem;
+  font-size:.72rem;
+  color:#9aa3ad;
+  margin:0 0 .25rem;
+  opacity:.9;
+}
+.meta-label{
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  font-weight:700;
+  font-size:.7rem;
+}
+.meta-sep{ opacity:.7; }
+.meta-edit{
+  min-width: 1.5ch;
+  outline:none;
+  border-bottom:1px dashed rgba(255,255,255,.2);
+  padding:0 .15rem .05rem;
+  color:#e6e8ea;
+}
+.meta-edit:empty:before{
+  content: attr(placeholder);
+  color:#6b7280;
+}
+.match .meta-bar{ margin-bottom:.3rem; }
+
+/* Finals cards need a touch more space for the header row */
+.finals .match .meta-bar{ margin-bottom:8px; }
+
+/* Smaller Exit Full Screen button */
+body.fullscreen #fullscreenBtn{
+  padding: .25rem .5rem;   /* was .6rem 1rem */
+  font-size: .75rem;       /* was ~.9rem */
+  border-radius: 6px;      /* was 10px */
+  top: .35rem;             /* was 1rem */
+  right: .35rem;           /* was 1rem */
+}
