@@ -35,22 +35,22 @@
   };
 
   const SAMPLE = [
-    "Ghost Dinkers","Zombie Smash Squad","Wicked Wiffles","Pumpkin Spikers",
-    "Ghoul Shots","Haunted Kitchen","Net Ghouls","Fang Serves",
-    "Cauldron Crushers","Spooky Slicers","Moonlight Dinks","Boo Bash",
-    "Coffin Corner","Potion Put-Away","Batty Backhand","Mummy Drops",
-    "Shadow Servers","Vamp Volleys","Web Winners","Spectral Spin",
-    "Lantern Lobs","Howl Hitters","Crypt Cruisers","Skelly Smashes",
-    "Wraith Wristers","Cursed Crosscourt","Phantom Paddles","Eerie Aces",
-    "Nightmare Nets","Jack-O-Trades","Hocus Focus","Ghastly Gains",
-    "Ghoul Patrol","Net Necromancers","Bone-Rally","Witchy Winners",
-    "Graveyard Gliders","Casket Crushers","Broomstick Bangers","Cobweb Crossers",
-    "Spirit Spinners","Pumpkin Poppers","Tombstone Topspin","Creepy Crosscourt",
-    "Fright Flick","Banshee Backspin","Crypt Keepers","Phantom Foursome",
-    "Ectoplasm Aces","Gargoyle Dinks","Skulk Servers","Lurker Lobs",
-    "Howler Hits","Specter Slices","Nocturne Nets","Haunt House",
-    "Batwing Baseliners","Cackle Crush","Ghast Smash","Scarecrow Slicers"
-  ];
+  "Kachow","Dynamos","The Oompaloompas","Dill With It","Dream Team",
+  "Breakfast Bunch","The net villians","Holier Than Thou","BYU Barbies",
+  "los chamos","Daphne and Velma","American Dawgs","The Things",
+  "Paddles Up","Paddle Royale","Dumb and Dumber","The Dinkin’ Dead",
+  "Sigma’s","Chugjug","The Minions","Kentucky Fried Champions",
+  "Dragon slayers","Benito","Pumpkin Pickleballers","Lisan al-Gaib",
+  "The Hamiltons","Dbd","Dink Dynasty","the turties","Pickled rats",
+  "Holy Cow","The Lemurs of Madagascar","Double trouble","Tanner ans Ethan",
+  "The Pickled Chefs","Mario Brothers","Men in black","Lit and Krunk",
+  "Party players!","Waldo’s Dinks","Dragon Army","Team hippie",
+  "Waldo and Wenda","California girls","Paddle Shmaddle","Fowl Play",
+  "Salon salom","Frosty Fraternity","Pickled Prisoners","Graveyard Grip Masters",
+  "67s","Kitchen is closed","Randomly assign","Asians","Team Kachow",
+  "Big Dill Ballerz","Girlie-pops","The paddle princesses","Curious Canadians",
+  "Spike on Muggles","Sticks","Route 66%","Soda pop","McKenya"
+];
 
   /* ---------- Helpers ---------- */
   // Build Round of 64 in NCAA-style top-to-bottom order
